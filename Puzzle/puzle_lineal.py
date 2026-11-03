@@ -3,7 +3,7 @@
 """
 Created on Mon Sep 28 11:59:08 2026
 
-@author: j
+@author: Alexander
 """
 
 class Nodo:
@@ -40,6 +40,13 @@ class Nodo:
     def __str__(self):
         return str(self.get_datos())
 
+cambios=[
+    ("cambio_cero_uno",     0,1),
+    ("cambio_uno_dos",      1,2),
+    ("cambio_dos_tres",     2,3),
+    ("cambio_tres_cuatro",  3,4),
+    ("cambio_cuatro_cinco", 4,5),
+]
 def busqueda_amplitud(estado_inicial,solucion):
     solucionado=False
     nodos_visitados=[]
@@ -55,29 +62,20 @@ def busqueda_amplitud(estado_inicial,solucion):
             return nodo
         else:
             dato_nodo=nodo.get_datos()
-            #operacion izquierda {x,x,1,4}
-            hijo=[dato_nodo[1],dato_nodo[0],dato_nodo[2],dato_nodo[3]]
-            hijo_izq=Nodo(hijo)
-            if((not hijo_izq.en_lista(nodos_pendientes)) and
-               (not hijo_izq.en_lista(nodos_visitados))):
-                nodos_pendientes.append(hijo_izq)
-            #operacion centro {3,x,x,4}
-            hijo=[dato_nodo[0],dato_nodo[2],dato_nodo[1],dato_nodo[3]]
-            hijo_centro=Nodo(hijo)
-            if((not hijo_centro.en_lista(nodos_pendientes)) and
-               (not hijo_centro.en_lista(nodos_visitados))):
-                nodos_pendientes.append(hijo_centro)
-            #operacion derecho {3,2,x,x}
-            hijo=[dato_nodo[0],dato_nodo[1],dato_nodo[3],dato_nodo[2]]
-            hijo_der=Nodo(hijo)
-            if((not hijo_der.en_lista(nodos_pendientes)) and
-               (not hijo_der.en_lista(nodos_visitados))):
-                nodos_pendientes.append(hijo_der)
-            nodo.set_hijos([hijo_izq,hijo_centro,hijo_der])
-
+            hijos=[]
+            for nombre,a,b in cambios:
+                hijo=dato_nodo[:]
+                hijo[a], hijo[b]= hijo[b],hijo[a]
+                nuevo=Nodo(hijo)
+                if((not nuevo.en_lista(nodos_pendientes)) and
+                   (not nuevo.en_lista(nodos_visitados))):
+                    nodos_pendientes.append(nuevo)
+                hijos.append(nuevo)
+            nodo.set_hijos(hijos)
+            
 if __name__=="__main__":
-    estado_inicial=[3,2,1,4]
-    solucion=[1,2,3,4]
+    estado_inicial=[3,6,1,4,2,5]
+    solucion=[1,2,3,4,5,6]
     nodo_solucion=busqueda_amplitud(estado_inicial,solucion)
     #resultados
     resultado=[]
