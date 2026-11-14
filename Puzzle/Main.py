@@ -6,7 +6,7 @@ Created on Mon Sep 28 11:59:08 2026
 @author: Alexander
 """
 
-from busqueda import busqueda_amplitud, reconstruir_camino
+from Busqueda import busqueda_amplitud, reconstruir_camino
 
 
 def main():

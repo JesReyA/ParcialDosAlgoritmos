@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Algoritmo de búsqueda en amplitud y reconstrucción del camino."""
 
-from nodo import Nodo
-from operaciones import cambios
+from Nodo import Nodo
+from Operaciones import cambios
 
 
 def busqueda_amplitud(estado_inicial, solucion):
